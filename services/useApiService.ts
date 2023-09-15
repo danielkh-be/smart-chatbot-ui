@@ -63,8 +63,6 @@ const useApiService = () => {
     [fetchService],
   );
 
-  // Comment
-
   const planningConv = useCallback(
     (params: PlanningRequestProps, signal?: AbortSignal) => {
       return fetchService.post<PlanningResponse>(`/api/planningconv`, {
