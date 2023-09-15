@@ -45,6 +45,7 @@ export const ChatbarSettings = () => {
         <ClearConversations onClearConversations={handleClearConversations} />
       ) : null}
 
+      {/** 
       <Import onImport={handleImportConversations} />
 
       <SidebarButton
@@ -58,12 +59,15 @@ export const ChatbarSettings = () => {
         icon={<IconSettings size={18} />}
         onClick={() => setIsSettingDialog(true)}
       />
+      
 
       {!serverSideApiKeyIsSet ? (
         <Key apiKey={apiKey} onApiKeyChange={handleApiKeyChange} />
       ) : null}
 
+      
       {!serverSidePluginKeysSet ? <ChatModeKeys /> : null}
+      */}
 
       <SettingDialog
         open={isSettingDialogOpen}
