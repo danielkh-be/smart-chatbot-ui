@@ -9,7 +9,7 @@ mongo_pass=$(cat .env.local|grep MONGO_INITDB_ROOT_PASSWORD|cut -d '=' -f 2)
 mongo_db=$(cat .env.local|grep MONGODB_DB|cut -d '=' -f 2)
 mongo_host=localhost
 mongo_port=27017
-output="./${mongo_db}.gz"
+output="./${mongo_db}"
 while getopts "h:p:d:o:" opt; do
     case $opt in
         h) mongo_host=$OPTARG;;
@@ -23,6 +23,6 @@ done
 docker-compose exec mongo mongodump --authenticationDatabase admin \
     -u "$mongo_user" -p "$mongo_pass" \
     --host="${mongo_host}" --port="${mongo_port}" \
-    --db="${mongo_db}" --gzip --archive=/tmp/chatui.tar.gz
-docker-compose cp mongo:/tmp/chatui.tar.gz "${output}"
+    --db="${mongo_db}" --out=dump2
+docker-compose cp mongo:dump2 "${output}"
 

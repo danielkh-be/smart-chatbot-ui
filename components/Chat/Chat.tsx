@@ -261,7 +261,13 @@ export const Chat = memo(() => {
                           <Spinner size="16px" className="mx-auto" />
                         </div>
                       ) : (
-                        'Chatbot UI'
+                        <div className="justify-center">
+                          <img
+                            src="https://i0.wp.com/www.bearingpointcaribbean.com/wp-content/uploads/2021/02/BrP_Logo_RGBW_NG.png?fit=1600%2C266&ssl=1&is-pending-load=1"
+                            className="object-contain"
+                          />
+                          <p>ChatGPT</p>
+                        </div>
                       )}
                     </div>
 
@@ -269,6 +275,7 @@ export const Chat = memo(() => {
                       <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                         <ModelSelect />
 
+                        {/*
                         <SystemPrompt
                           conversation={selectedConversation}
                           systemPrompt={systemPrompt}
@@ -276,6 +283,7 @@ export const Chat = memo(() => {
                           publicPrompts={publicPrompts}
                           onChangePrompt={(prompt) => setSystemPrompt(prompt)}
                         />
+                        */}
 
                         <label className="mb-2 text-left text-neutral-700 dark:text-neutral-400">
                           {t('Temperature')}

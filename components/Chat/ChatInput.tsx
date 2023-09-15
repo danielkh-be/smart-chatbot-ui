@@ -140,7 +140,8 @@ export const ChatInput = ({ onSend, onRegenerate, textareaRef }: Props) => {
   const [lastDownKey, setLastDownKey] = useState<string>('');
   const [endComposing, setEndComposing] = useState<boolean>(false);
   const [filteredPrompts, setFilteredPrompts] = useState<Prompt[]>(prompts);
-  const [filteredPublicPrompts, setFilteredPublicPrompts] = useState<Prompt[]>(publicPrompts);
+  const [filteredPublicPrompts, setFilteredPublicPrompts] =
+    useState<Prompt[]>(publicPrompts);
 
   const promptListRef = useRef<HTMLUListElement | null>(null);
 
@@ -200,7 +201,9 @@ export const ChatInput = ({ onSend, onRegenerate, textareaRef }: Props) => {
   };
 
   const handleInitModal = () => {
-    const selectedPrompt = [...filteredPrompts, ...filteredPublicPrompts][activePromptIndex];
+    const selectedPrompt = [...filteredPrompts, ...filteredPublicPrompts][
+      activePromptIndex
+    ];
     if (selectedPrompt) {
       setContent((prevContent) => {
         const newContent = prevContent?.replace(
@@ -223,7 +226,8 @@ export const ChatInput = ({ onSend, onRegenerate, textareaRef }: Props) => {
       return;
     }
     if (showPromptList) {
-      const totalPrompts = filteredPrompts.length + filteredPublicPrompts.length;
+      const totalPrompts =
+        filteredPrompts.length + filteredPublicPrompts.length;
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         setActivePromptIndex((prevIndex) =>
@@ -313,14 +317,14 @@ export const ChatInput = ({ onSend, onRegenerate, textareaRef }: Props) => {
     const filteredPrompts = prompts.filter((prompt) =>
       prompt.name.toLowerCase().includes(promptInputValue.toLowerCase()),
     );
-    setFilteredPrompts(filteredPrompts)
+    setFilteredPrompts(filteredPrompts);
   }, [prompts, promptInputValue, setFilteredPrompts]);
 
   useEffect(() => {
     const filteredPublicPrompts = publicPrompts.filter((prompt) =>
       prompt.name.toLowerCase().includes(promptInputValue.toLowerCase()),
     );
-    setFilteredPublicPrompts(filteredPublicPrompts)
+    setFilteredPublicPrompts(filteredPublicPrompts);
   }, [publicPrompts, promptInputValue, setFilteredPublicPrompts]);
 
   useEffect(() => {
@@ -452,21 +456,24 @@ export const ChatInput = ({ onSend, onRegenerate, textareaRef }: Props) => {
             <IconSend size={18} />
           )}
         </button>
-        {showPromptList && (filteredPrompts.length > 0 || filteredPublicPrompts.length > 0) && (
-          <div className="absolute bottom-12 w-full">
-            <PromptList
-              activePromptIndex={activePromptIndex}
-              prompts={filteredPrompts}
-              publicPrompts={filteredPublicPrompts}
-              onSelect={handleInitModal}
-              onMouseOver={setActivePromptIndex}
-              promptListRef={promptListRef}
-            />
-          </div>
-        )}
+        {showPromptList &&
+          (filteredPrompts.length > 0 || filteredPublicPrompts.length > 0) && (
+            <div className="absolute bottom-12 w-full">
+              <PromptList
+                activePromptIndex={activePromptIndex}
+                prompts={filteredPrompts}
+                publicPrompts={filteredPublicPrompts}
+                onSelect={handleInitModal}
+                onMouseOver={setActivePromptIndex}
+                promptListRef={promptListRef}
+              />
+            </div>
+          )}
         {isModalVisible && (
           <VariableModal
-            prompt={[...filteredPrompts, ...filteredPublicPrompts][activePromptIndex]}
+            prompt={
+              [...filteredPrompts, ...filteredPublicPrompts][activePromptIndex]
+            }
             variables={variables}
             onSubmit={handleSubmit}
             onClose={() => setIsModalVisible(false)}
@@ -476,20 +483,6 @@ export const ChatInput = ({ onSend, onRegenerate, textareaRef }: Props) => {
           <ChatInputTokenCount content={content} />
         </div>
       </ChatInputContainer>
-      <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-white/50 md:px-4 md:pt-3 md:pb-6">
-        <a
-          href="https://github.com/dotneet/smart-chatbot-ui"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          Smart ChatBot UI
-        </a>
-        .{' '}
-        {t(
-          "Smart Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
-        )}
-      </div>
     </div>
   );
 };
